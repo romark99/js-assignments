@@ -33,7 +33,18 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let i=99;
+    while (i>2) {
+        yield String(i)+" bottles of beer on the wall, "+String(i)+" bottles of beer.";
+        yield "Take one down and pass it around, "+String(i-1)+" bottles of beer on the wall.";
+        i--;
+    }
+    yield '2 bottles of beer on the wall, 2 bottles of beer.';
+    yield 'Take one down and pass it around, 1 bottle of beer on the wall.';
+    yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -47,7 +58,15 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    yield 0;
+    yield 1;
+    let arr=[0,1];
+    while (true) {
+        let sum=arr[0]+arr[1];
+        yield sum;
+        arr[0]=arr[1];
+        arr[1]=sum;
+    }
 }
 
 
@@ -82,6 +101,28 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
+    // function* func(node) {
+    //     yield node;
+    //     if (node.children>0) {
+    //         for (let i = 0; i < node.children.length; i++) {
+    //             let foo=func(node.children[i]);
+    //             for(;;) {
+    //                 let y = foo(node.children[i]).next();
+    //                 if (!y)
+    //                     break;
+    //                 else
+    //                     yield y;
+    //             }
+    //         }
+    //     }
+    // }
+    // for (;;) {
+    //     let y = func(root).next();
+    //     if (!y)
+    //         break;
+    //     else
+    //         yield y;
+    // }
     throw new Error('Not implemented');
 }
 
@@ -108,6 +149,18 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
+    // yield root;
+    // function* func(node) {
+    //     for (let i=0; i<node.children.length; i++) {
+    //         yield node.children[i];
+    //     }
+    //     for (let i=0; i<node.children.length; i++) {
+    //
+    //     }
+    // }
+    // for (let i=0; i<root.children.length; i++) {
+    //
+    // }
     throw new Error('Not implemented');
 }
 
