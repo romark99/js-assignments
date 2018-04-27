@@ -34,7 +34,65 @@
  *
  */
 function parseBankAccount(bankAccount) {
-    throw new Error('Not implemented');
+    let arr=bankAccount.split('\n');
+    let digits=[];
+    for (let i=0; i<arr[0].length; i+=3) {
+        let digit = -1;
+        if (arr[2][i+2]===' ') {
+            digit = 2;
+        }
+        else {
+            if (arr[0][i+1]===' ') {
+                if (arr[1][i]===' ') {
+                    digit = 1;
+                }
+                else {
+                    digit = 4;
+                }
+            }
+            else {
+                if (arr[2][i+1]===' ') {
+                    digit = 7;
+                }
+                else {
+                    if (arr[1][i+2]===' '){
+                        if (arr[2][i]===' ') {
+                            digit = 5;
+                        }
+                        else {
+                            digit = 6;
+                        }
+                    }
+                    else {
+                        if (arr[2][i]===' ') {
+                            if (arr[1][i]===' ') {
+                                digit = 3;
+                            }
+                            else {
+                                digit = 9;
+                            }
+                        }
+                        else {
+                            if (arr[1][i+1]===' ') {
+                                digit = 0;
+                            }
+                            else {
+                                digit = 8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        digits.unshift(digit);
+    }
+    let num = 0;
+    let ten = 1;
+    for (let i=0; i<digits.length; i++) {
+        num += ten*digits[i];
+        ten*=10;
+    }
+    return num;
 }
 
 
@@ -100,8 +158,18 @@ const PokerRank = {
 }
 
 function getPokerHandRank(hand) {
+    // for (let i=0; i<5; i++) {
+    //     if (hand[i].length === 3) {
+    //         hand[i] = "0" + hand[i][2];
+    //     }
+    // }
+    // const weightString = "A234567890JQKA";
+    // let cards1=[];
+    // let cards2=[];
+    // return PokerRank.Straight;
     throw new Error('Not implemented');
 }
+
 
 
 /**

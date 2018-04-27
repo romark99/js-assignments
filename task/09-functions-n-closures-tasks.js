@@ -26,9 +26,10 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    return function(x) {
+        return f(g(x));
+    }
 }
-
 
 /**
  * Returns the math power function with the specified exponent
@@ -47,7 +48,9 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function(x) {
+        return Math.pow(x, exponent);
+    }
 }
 
 
@@ -64,8 +67,18 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-    throw new Error('Not implemented');
+function getPolynom(...args) {
+    return function(x) {
+        if (args.length>0) {
+            let sum = 0;
+            for (let i = 0; i < args.length; i++) {
+                sum += args[i]*Math.pow(x, args.length - 1 - i);
+            }
+            return sum;
+        }
+        else
+            return null;
+    }
 }
 
 
@@ -84,8 +97,13 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    let n=func();
+    let foo = function () {
+        return n;
+    };
+    return foo;
 }
+
 
 
 /**
@@ -132,7 +150,21 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    let foo = function () {
+        let s=func.name+"(";
+        if (arguments.length>0){
+            s+=JSON.stringify(arguments[0]);
+            for (let i=1; i<arguments.length; i++) {
+                s+=(","+JSON.stringify(arguments[i]));
+            }
+        }
+        s+=") ";
+        logFunc(s+"starts");
+        let tt=func(...arguments);
+        logFunc(s+"ends");
+        return tt;
+    };
+    return foo;
 }
 
 
@@ -171,6 +203,15 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
+    // let arr=[];
+    // for (let i=0; i<1000; i++) {
+    //     let KOSTYL = i;
+    //     arr[i]=func;
+    // }
+    // function* func() {
+    //     yield KOSTYL++;
+    // }
+    // return arr[startFrom];
     throw new Error('Not implemented');
 }
 

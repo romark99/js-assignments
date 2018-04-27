@@ -17,8 +17,46 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    const arr = ['N',
+    'NbE',
+    'NNE',
+    'NEbN',
+    'NE',
+    'NEbE',
+    'ENE',
+    'EbN',
+    'E',
+    'EbS',
+    'ESE',
+    'SEbE',
+    'SE',
+    'SEbS',
+    'SSE',
+    'SbE',
+    'S',
+    'SbW',
+    'SSW',
+    'SWbS',
+    'SW',
+    'SWbW',
+    'WSW',
+    'WbS',
+    'W',
+    'WbN',
+    'WNW',
+    'NWbW',
+    'NW',
+    'NWbN',
+    'NNW',
+    'NbW'];
+    let arr2=[];
+    for (let i=0; i<arr.length; i++) {
+        let obj={};
+        obj.abbreviation = arr[i];
+        obj.azimuth = 11.25*i;
+        arr2.push(obj);
+    }
+    return arr2;
 }
 
 
@@ -113,7 +151,39 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
+    let dms = [];
+    for (let i=0; i<7; i++) {
+        let arr=[];
+        for (let j=0; j<7; j++) {
+            arr.push(0);
+        }
+        dms.push(arr);
+    }
+    for (let i=0; i<dominoes.length; i++) {
+        dms[dominoes[i][0]][dominoes[i][1]] = 1;
+        dms[dominoes[i][1]][dominoes[i][0]] = 1;
+    }
+    let visited=[];
+    for (let i=0; i<7; i++) {
+        let sum = 0;
+        for (let j=0; j<7; j++) {
+            sum+=dms[j][i];
+        }
+        if (dms[i][i]===1) {
+            sum--;
+            if (sum===0) {
+                return false;
+            }
+        }
+        visited.push(sum);
+    }
+    let sum2=0;
+    for (let i=0; i<7; i++) {
+        if (visited[i]%2===1) {
+            sum2++;
+        }
+    }
+    return sum2 <= 2;
 }
 
 

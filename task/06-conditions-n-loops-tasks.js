@@ -192,18 +192,20 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    // str = "\n"+str;
-    // while (str.length>2) {
-    //     if (str.split(str[1]).length - 1 == 1) {
-    //         return str[1];
-    //     }
-    //     str = str.replace(str[0],"");
-    // }
-    // if (str.length==2)
-    //     return str[1];
-    // else
-    //     return null;
-    throw new Error('Not implemented');
+    let ok = false;
+    for (let i=0; i<str.length-1; i++) {
+        ok = true;
+        for (let j=0; j<str.length; j++) {
+            if (j!==i && str[i] === str[j]) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) {
+            return str[i];
+        }
+    }
+    return null;
 }
 
 
@@ -304,27 +306,21 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(cnn) {
-    // let sum = cnn%10;
-    // let num=cnn;
     // let arr=[];
-    // while (num>0) {
-    //     arr.push(num%10);
-    //     num=parseInt(num/10);
+    // while(cnn>0) {
+    //     arr.unshift(cnn%10);
+    //     cnn=parseInt(cnn / 10);
     // }
-    // let nDigits = arr.length;
-    // let parity = nDigits%2;
-    // for (let i=0; i<nDigits; i++) {
-    //     let digit = arr[nDigits - 1 - i];
-    //     if ((nDigits-1-i)%2===parity){
-    //         digit*=2;
-    //     }
-    //     if (digit>9) {
-    //         digit-=9;
-    //     }
-    //     sum+=digit;
-    // }
-    // return sum%10===0;
-    throw new Error('Not implemented');
+    let arr = (""+cnn).split("").map(x=>Number(x));
+    if (arr.length%2===1)
+        arr.unshift(0);
+    let sum=0;
+    for(let i=0; i<arr.length; i+=2) {
+        sum+=arr[i+1];
+        arr[i]=2*arr[i]>9?(2*arr[i]-9):2*arr[i];
+        sum+=arr[i];
+    }
+    return sum%10===0;
 }
 
 
@@ -404,9 +400,7 @@ function isBracketsBalanced(str) {
             }
         }
     }
-    if (arr.length===0)
-        return true;
-    return false;
+    return arr.length === 0;
 }
 
 

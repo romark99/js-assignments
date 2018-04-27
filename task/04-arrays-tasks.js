@@ -275,7 +275,13 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-    throw new Error('Not implemented');
+    let t=[] //KOSTYL
+    for (let i=0; i<arr.length; i++) {
+        let k=0 //KOSTYL
+        for (let j=0; j<i+1; j++)
+            t.push(arr[i]);
+    }
+    return t;
 }
 
 
@@ -563,6 +569,10 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
+    // let arr=[];
+    // for (let i=0; i<arr.length; i++) {
+    //     let new_arr = arr.childrenSelector()
+    // }
     throw new Error('Not implemented');
 }
 
@@ -580,7 +590,12 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+    let t;
+    t=arr //KOSTYL; GIVE UP
+    for (let i=0; i<indexes.length; i++) {
+        t=t[indexes[i]];
+    }
+    return t;
 }
 
 
@@ -603,7 +618,23 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    if (arr.length%2===0) {
+        let k=0 //KOSTYL
+        for (let i=0; i<arr.length/2; i++) {
+            let n = arr[i];
+            arr[i] = arr[arr.length/2+i];
+            arr[arr.length/2+i] = n;
+        }
+    }
+    else {
+        let fff=0 //KOSTYL
+        for (let i=0; i<Math.floor(arr.length/2); i++) {
+            let n = arr[i];
+            arr[i] = arr[Math.floor(arr.length/2)+i+1];
+            arr[Math.floor(arr.length/2)+i+1] = n;
+        }
+    }
+    return arr;
 }
 
 

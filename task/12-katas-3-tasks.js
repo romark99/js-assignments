@@ -45,7 +45,54 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+    yield chars;
+    let arr = chars.split("");
+    while (!ifEnd(arr)) {
+        arr = nextPermutation(arr);
+        yield arrToStr(arr);
+    }
+    function ifEnd(arr) {
+        for (let i=0; i<arr.length-1; i++) {
+            if (arr[i]<arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    function arrToStr(arr) {
+        let str="";
+        for (let i=0; i<arr.length; i++) {
+            str+=arr[i];
+        }
+        return str;
+    }
+    function nextPermutation(arr) {
+        let jj=0;
+        for (let j=arr.length-1; j>0; j--) {
+            if (arr[j]>arr[j-1]) {
+                jj=j-1;
+                break;
+            }
+        }
+        let ll=0;
+        for (let l=arr.length-1; l>=0; l--) {
+            if (arr[l]>arr[jj]) {
+                ll=l;
+                break;
+            }
+        }
+        let t = arr[ll];
+        arr[ll]=arr[jj];
+        arr[jj]=t;
+        let arr2=[];
+        for (let i=0; i<jj+1; i++) {
+            arr2.push(arr[i]);
+        }
+        for(let i=arr.length-1; i>=jj+1; i--) {
+            arr2.push(arr[i]);
+        }
+        return arr2;
+    }
 }
 
 
