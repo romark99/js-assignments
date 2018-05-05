@@ -26,9 +26,7 @@
  *
  */
 function getComposition(f,g) {
-    return function(x) {
-        return f(g(x));
-    }
+    return x => f(g(x));
 }
 
 /**
@@ -48,9 +46,7 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    return function(x) {
-        return Math.pow(x, exponent);
-    }
+    return x => Math.pow(x, exponent);
 }
 
 
@@ -69,7 +65,7 @@ function getPowerFunction(exponent) {
  */
 function getPolynom() {
     let args=arguments;
-    return function(x) {
+    return x => {
         if (args.length>0) {
             let sum = 0;
             for (let i = 0; i < args.length; i++) {
@@ -99,10 +95,7 @@ function getPolynom() {
  */
 function memoize(func) {
     let n=func();
-    let foo = function () {
-        return n;
-    };
-    return foo;
+    return () => n;
 }
 
 
@@ -151,21 +144,20 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    let foo = function () {
-        let s=func.name+"(";
-        if (arguments.length>0){
-            s+=JSON.stringify(arguments[0]);
-            for (let i=1; i<arguments.length; i++) {
-                s+=(","+JSON.stringify(arguments[i]));
+    return function () {
+        let s = func.name + "(";
+        if (arguments.length > 0) {
+            s += JSON.stringify(arguments[0]);
+            for (let i = 1; i < arguments.length; i++) {
+                s += ("," + JSON.stringify(arguments[i]));
             }
         }
-        s+=") ";
-        logFunc(s+"starts");
-        let tt=func(...arguments);
-        logFunc(s+"ends");
+        s += ") ";
+        logFunc(s + "starts");
+        let tt = func(...arguments);
+        logFunc(s + "ends");
         return tt;
     };
-    return foo;
 }
 
 
