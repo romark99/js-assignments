@@ -141,7 +141,17 @@ function* depthTraversalTree(root) {
     //     for (let i=0; i<root.children.length; i++)
     //         yield * depthTraversalTree(root.children[i]);
     // }
-    throw new Error('Not implemented');
+    let stack = [];
+    stack.push(root);
+    while (stack.length>0) {
+        let node = stack.pop();
+        yield node;
+        if (node.children!==undefined) {
+            for (let i = node.children.length - 1; i >= 0; i--) {
+                stack.push(node.children[i]);
+            }
+        }
+    }
 }
 
 
@@ -167,7 +177,21 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let queue = [];
+    queue.push(root);
+    while (queue.length>0) {
+        let qq=queue.length;
+        for (let i=0; i<qq; i++) {
+            yield queue[i];
+        }
+        let arr=[];
+        for (let i=0; i<qq; i++) {
+            if (queue[i].children!==undefined) {
+                arr.push(...queue[i].children);
+            }
+        }
+        queue=arr;
+    }
 }
 
 

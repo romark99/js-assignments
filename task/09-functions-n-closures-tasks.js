@@ -196,15 +196,6 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    // let arr=[];
-    // for (let i=0; i<1000; i++) {
-    //     let KOSTYL = i;
-    //     arr[i]=func;
-    // }
-    // function* func() {
-    //     yield KOSTYL++;
-    // }
-    // return arr[startFrom];
     throw new Error('Not implemented');
 }
 
