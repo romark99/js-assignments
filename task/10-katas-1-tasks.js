@@ -126,7 +126,22 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let nums=[];
+    let Matrix=[];
+    let number=0;
+    for (let i=n-1; i>=0; i--) {
+        nums.push(i-n+1);
+        Matrix.push([]);
+    }
+    for (let i=0; i<2*n-1; i++) {
+        for (let j=0; j<n; j++) {
+            if (nums[j]>=0&&nums[j]<n) {
+                Matrix[nums[j]].push(number++);
+            }
+        }
+        nums = nums.map(x=>++x).reverse();
+    }
+    return Matrix;
 }
 
 
