@@ -177,8 +177,8 @@ function logger(func, logFunc) {
 function partialUsingArguments(fn) {
     let args = [...arguments];
     args.shift();
-    return (...rightArgs)=> {
-        args.push(...rightArgs);
+    return function() {
+        args.push(...arguments);
         return fn(...args);
     }
 }
